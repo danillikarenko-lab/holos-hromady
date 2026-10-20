@@ -86,6 +86,7 @@ form.addEventListener("submit", async event => {
 
     message.textContent =
       "Дякуємо! Ваші відповіді успішно надіслано.";
+    renderResults();
 
     form.reset();
     updateProgress();
@@ -102,22 +103,67 @@ form.addEventListener("submit", async event => {
     });
   }
 });
-function percent(n, total) { return total ? `${Math.round(n / total * 100)}%` : "—"; }
-function renderResults() {
-  const data = getResponses();
-  document.getElementById("totalResponses").textContent = data.length;
-  document.getElementById("seriousPercent").textContent = percent(data.filter(x => ["Серйозна", "Дуже серйозна"].includes(x.strays)).length, data.length);
-  document.getElementById("foodPercent").textContent = percent(data.filter(x => x.food === "Часто").length, data.length);
-  document.getElementById("resultsNote").textContent = data.length
-    ? `Локально збережено ${data.length} ${data.length === 1 ? "відповідь" : data.length < 5 ? "відповіді" : "відповідей"}. Це лише дані цього браузера, а не загальна статистика громади.`
-    : "Поки що відповідей немає. Будьте першими — пройдіть опитування вище.";
+function percent(n, total) {
+function percent(n, total) {
+  return total > 0
+    ? `${Math.round(n / total * 100)}%`
+    : "—";
 }
-document.getElementById("showResults").addEventListener("click", renderResults);
-document.getElementById("resetData").addEventListener("click", () => {
-  if (confirm("Очистити всі демонстраційні відповіді, збережені в цьому браузері?")) {
-    try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
-    renderResults();
+
+async function renderResults() {
+  const totalEl = document.getElementById("totalResponses");
+  const seriousEl = document.getElementById("seriousPercent");
+  const foodEl = document.getElementById("foodPercent");
+  const noteEl = document.getElementById("resultsNote");
+
+  noteEl.textContent = "Завантаження статистики...";
+
+  try {
+    const result = await fetch(
+      `${SUPABASE_URL.replace(/\/+$/, "")}/rest/v1/rpc/survey_public_stats`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`
+        },
+        body: "{}"
+      }
+    );
+
+    if (!result.ok) {
+      throw new Error(
+        `HTTP ${result.status}: ${await result.text()}`
+      );
+    }
+
+    const data = await result.json();
+
+    const total = Number(data.total) || 0;
+    const serious = Number(data.strays_serious) || 0;
+    const food = Number(data.food_frequent) || 0;
+
+    totalEl.textContent = total;
+    seriousEl.textContent = percent(serious, total);
+    foodEl.textContent = percent(food, total);
+
+    noteEl.textContent = total > 0
+      ? `Статистика на основі ${total} отриманих анкет.`
+      : "Поки що відповідей немає. Будьте першими!";
+
+  } catch (error) {
+    console.error("Statistics error:", error);
+    totalEl.textContent = "—";
+    seriousEl.textContent = "—";
+    foodEl.textContent = "—";
+    noteEl.textContent =
+      "Не вдалося завантажити статистику. Спробуйте оновити.";
   }
-});
+}
+
+document.getElementById("showResults")
+  .addEventListener("click", renderResults);
+
 renderResults();
 updateProgress();
