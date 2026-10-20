@@ -1,3 +1,5 @@
+const SUPABASE_URL = "https://gdicbbcpvfbohqrjdzie.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_WTPFcMtRFf6y0iraVajbsA_ugXDFS4Q";
 const STORAGE_KEY = "holosHromadyResponsesV1";
 const form = document.getElementById("surveyForm");
 const message = document.getElementById("formMessage");
@@ -42,9 +44,11 @@ function updateProgress() {
 form.addEventListener("change", updateProgress);
 form.addEventListener("input", updateProgress);
 
-form.addEventListener("submit", event => {
+
+form.addEventListener("submit", async event => {
   event.preventDefault();
   if (!form.reportValidity()) return;
+
   const response = {
     city: document.getElementById("city").value.trim(),
     strays: form.querySelector('input[name="strays"]:checked').value,
@@ -54,19 +58,49 @@ form.addEventListener("submit", event => {
     support: form.querySelector('input[name="support"]:checked').value,
     submittedAt: new Date().toISOString()
   };
-  const responses = getResponses();
-  responses.push(response);
-  if (!saveResponses(responses)) {
-    message.textContent = "Не вдалося зберегти відповіді в цьому браузері. Перевірте налаштування сховища.";
-    message.classList.add("visible");
-    return;
-  }
-  message.textContent = "Дякуємо! Відповіді збережено локально в цьому браузері. Вони не були надіслані організаторам або на сервер.";
+
+  const submitButton = form.querySelector('[type="submit"]');
+  if (submitButton) submitButton.disabled = true;
+
   message.classList.add("visible");
-  form.reset();
-  updateProgress();
-  renderResults();
-  message.scrollIntoView({behavior:"smooth", block:"center"});
+  message.textContent = "Надсилаємо відповіді...";
+
+  try {
+    const result = await fetch(
+      `${SUPABASE_URL}/rest/v1/survey_responses`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({ answers: response })
+      }
+    );
+
+    if (!result.ok) {
+      throw new Error(`HTTP ${result.status}: ${await result.text()}`);
+    }
+
+    message.textContent =
+      "Дякуємо! Ваші відповіді успішно надіслано.";
+
+    form.reset();
+    updateProgress();
+
+  } catch (error) {
+    console.error("Supabase error:", error);
+    message.textContent =
+      "Не вдалося надіслати відповіді. Спробуйте ще раз.";
+  } finally {
+    if (submitButton) submitButton.disabled = false;
+    message.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
 });
 function percent(n, total) { return total ? `${Math.round(n / total * 100)}%` : "—"; }
 function renderResults() {
