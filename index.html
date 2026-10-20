@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Голос громади — анонімне опитування про безпритульних тварин і потреби притулків у кормі.">
+  <title>Голос громади — добробут тварин</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Голос громади — на головну">
+      <span class="brand-mark" aria-hidden="true">🐾</span>
+      <span><strong>Голос громади</strong><small>Разом за добробут тварин</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Відкрити меню" aria-expanded="false">☰</button>
+    <nav id="nav">
+      <a href="#home">Головна</a><a href="#about">Про проблему</a><a href="#survey">Опитування</a><a href="#results">Результати</a><a href="#contact">Контакти</a>
+    </nav>
+    <a class="button button-small header-cta" href="#survey">Пройти опитування <span>→</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow">СОЦІОЛОГІЧНЕ ОПИТУВАННЯ</p>
+        <h1>Яка ситуація з безпритульними тваринами та кормом у притулках?</h1>
+        <p class="hero-copy">Ваша думка важлива! Відповіді допоможуть краще зрозуміти проблеми, визначити потреби притулків і знайти способи підтримки тварин.</p>
+        <a class="button" href="#survey">▤ &nbsp; Пройти опитування <span>→</span></a>
+        <p class="time-note">◷ &nbsp; Займе лише 2–5 хвилин</p>
+      </div>
+      <div class="hero-note">Їм потрібні<br>наша увага<br>і підтримка ♡</div>
+    </section>
+
+    <section class="importance section-wrap">
+      <div class="importance-intro">
+        <h2>Чому це важливо?</h2>
+        <p>Безпритульні тварини — це не лише про жалість. Це про безпеку, здоров’я громади, гуманність і відповідальність кожного з нас.</p>
+      </div>
+      <article class="reason"><span class="icon-circle green">🐾</span><h3>Зменшення кількості безпритульних</h3><p>Допомагає планувати стерилізацію та програми прилаштування.</p></article>
+      <article class="reason"><span class="icon-circle orange">🥣</span><h3>Нестача корму в притулках</h3><p>Допомагає визначити джерела підтримки та фінансування.</p></article>
+      <article class="reason"><span class="icon-circle blue">🛡</span><h3>Безпека громади</h3><p>Здорові тварини — менше ризиків для людей і тварин.</p></article>
+      <article class="reason"><span class="icon-circle pink">♥</span><h3>Гуманне суспільство</h3><p>Це показник зрілості та турботи про тих, хто не може попросити про допомогу.</p></article>
+    </section>
+
+    <section class="about section-wrap" id="about">
+      <div class="about-photo" role="img" aria-label="Собака біля миски з кормом"></div>
+      <div class="about-copy">
+        <p class="eyebrow">ПРО ПРОБЛЕМУ</p>
+        <h2>Допомога починається з розуміння</h2>
+        <p>Притулки можуть потребувати корму, ліків, волонтерів і коштів на щоденний догляд. Опитування збирає думки мешканців, щоб побачити, які питання потребують найбільшої уваги.</p>
+        <p>Відповідайте чесно — тут немає правильних чи неправильних відповідей. Опитування анонімне: не вказуйте особисті дані.</p>
+        <a class="text-link" href="#survey">Висловити свою думку <span>→</span></a>
+      </div>
+      <aside class="question-preview">
+        <h3>Про що запитаємо?</h3>
+        <ul>
+          <li>Як ви оцінюєте кількість безпритульних тварин?</li>
+          <li>Чи вистачає притулкам корму?</li>
+          <li>Що, на вашу думку, спричиняє нестачу допомоги?</li>
+          <li>Яку підтримку ви готові надавати?</li>
+        </ul>
+        <a class="button button-outline" href="#survey">Переглянути запитання</a>
+      </aside>
+    </section>
+
+    <section class="survey-section" id="survey">
+      <div class="section-heading">
+        <p class="eyebrow">ВАШ ГОЛОС ВАЖЛИВИЙ</p>
+        <h2>Пройдіть коротке опитування</h2>
+        <p>Відповіді збережуться в цьому браузері на цьому пристрої. Для централізованого збору відповідей потрібне підключення до сервера.</p>
+      </div>
+      <form id="surveyForm" class="survey-form">
+        <div class="progress-row"><span id="progressText">Заповнено 0 з 6 запитань</span><div class="progress"><span id="progressBar"></span></div></div>
+        <fieldset>
+          <legend>1. У якому населеному пункті ви проживаєте?</legend>
+          <input name="city" id="city" type="text" placeholder="Місто або село (необов’язково)">
+        </fieldset>
+        <fieldset>
+          <legend>2. Як ви оцінюєте проблему безпритульних тварин у вашому населеному пункті? <b>*</b></legend>
+          <label class="option"><input type="radio" name="strays" value="Незначна" required><span>Незначна</span></label>
+          <label class="option"><input type="radio" name="strays" value="Помірна"><span>Помірна</span></label>
+          <label class="option"><input type="radio" name="strays" value="Серйозна"><span>Серйозна</span></label>
+          <label class="option"><input type="radio" name="strays" value="Дуже серйозна"><span>Дуже серйозна</span></label>
+          <label class="option"><input type="radio" name="strays" value="Важко відповісти"><span>Важко відповісти</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>3. Як часто, на вашу думку, притулкам не вистачає корму? <b>*</b></legend>
+          <label class="option"><input type="radio" name="food" value="Майже ніколи" required><span>Майже ніколи</span></label>
+          <label class="option"><input type="radio" name="food" value="Іноді"><span>Іноді</span></label>
+          <label class="option"><input type="radio" name="food" value="Часто"><span>Часто</span></label>
+          <label class="option"><input type="radio" name="food" value="Важко відповісти"><span>Важко відповісти</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>4. Які причини нестачі корму ви вважаєте основними?</legend>
+          <label class="option"><input type="checkbox" name="causes" value="Мало пожертв"><span>Недостатньо пожертв</span></label>
+          <label class="option"><input type="checkbox" name="causes" value="Зростання кількості тварин"><span>Зростання кількості тварин</span></label>
+          <label class="option"><input type="checkbox" name="causes" value="Високі ціни"><span>Високі ціни на корм</span></label>
+          <label class="option"><input type="checkbox" name="causes" value="Недостатня поінформованість"><span>Люди мало знають про потреби притулків</span></label>
+          <label class="option"><input type="checkbox" name="causes" value="Інше"><span>Інше / важко відповісти</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>5. Як ви готові допомагати притулкам?</legend>
+          <label class="option"><input type="checkbox" name="help" value="Передавати корм"><span>Передавати корм та необхідні речі</span></label>
+          <label class="option"><input type="checkbox" name="help" value="Фінансова допомога"><span>Робити благодійні внески</span></label>
+          <label class="option"><input type="checkbox" name="help" value="Волонтерство"><span>Допомагати як волонтер</span></label>
+          <label class="option"><input type="checkbox" name="help" value="Поширювати інформацію"><span>Поширювати інформацію про потреби</span></label>
+          <label class="option"><input type="checkbox" name="help" value="Поки не готовий/готова"><span>Поки не готовий / готова</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>6. Чи потрібно більше програм підтримки притулків? <b>*</b></legend>
+          <label class="option"><input type="radio" name="support" value="Так, дуже потрібно" required><span>Так, це дуже важливо</span></label>
+          <label class="option"><input type="radio" name="support" value="Можливо, залежно від потреб"><span>Можливо, залежно від потреб</span></label>
+          <label class="option"><input type="radio" name="support" value="Не впевнений/не впевнена"><span>Не впевнений / не впевнена</span></label>
+        </fieldset>
+        <label class="consent"><input type="checkbox" id="confirm" required> <span>Підтверджую, що відповідаю добровільно та не вказую особистих даних. <b>*</b></span></label>
+        <button class="button submit-button" type="submit">Надіслати відповіді <span>→</span></button>
+        <p class="form-note">Поля зі зірочкою обов’язкові. Це навчальний демонстраційний сайт, відповіді не надсилаються організаторам.</p>
+        <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section class="results section-wrap" id="results">
+      <div class="results-copy">
+        <p class="eyebrow">РЕЗУЛЬТАТИ</p>
+        <h2>Кожна відповідь допомагає побачити картину</h2>
+        <p>Тут відображатиметься підсумок відповідей, зібраних на цьому пристрої. Це не репрезентативна статистика всіх громадян.</p>
+        <button class="button button-outline" id="showResults">Оновити результати</button>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-icon">📝</span><strong id="totalResponses">0</strong><span>збережених відповідей</span></article>
+        <article class="stat-card"><span class="stat-icon">🐾</span><strong id="seriousPercent">—</strong><span>вважають проблему серйозною</span></article>
+        <article class="stat-card"><span class="stat-icon">🥣</span><strong id="foodPercent">—</strong><span>кажуть, що корму бракує часто</span></article>
+      </div>
+      <p class="results-note" id="resultsNote">Поки що відповідей немає. Будьте першими — пройдіть опитування вище.</p>
+      <button class="reset-link" id="resetData" type="button">Очистити локальні демонстраційні дані</button>
+    </section>
+
+    <section class="cta-band section-wrap">
+      <div class="cta-paw">🐾</div><div><h2>Ваша думка має значення!</h2><p>Пройдіть опитування — зробіть свій внесок у краще майбутнє для безпритульних тварин.</p></div><a class="button button-light" href="#survey">Пройти опитування →</a>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="footer-main">
+      <a class="brand footer-brand" href="#home"><span class="brand-mark">🐾</span><span><strong>Голос громади</strong><small>Разом за добробут тварин</small></span></a>
+      <div class="footer-links"><a href="#home">Головна</a><a href="#about">Про проблему</a><a href="#survey">Опитування</a><a href="#results">Результати</a></div>
+      <div class="footer-contact"><strong>Є питання чи пропозиції?</strong><span>Додайте контакти організаторів перед публікацією.</span></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="year"></span> Голос громади. Демонстраційний проєкт.</span><a href="#home">На початок ↑</a></div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
