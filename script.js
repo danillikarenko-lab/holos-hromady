@@ -104,7 +104,6 @@ form.addEventListener("submit", async event => {
   }
 });
 function percent(n, total) {
-function percent(n, total) {
   return total > 0
     ? `${Math.round(n / total * 100)}%`
     : "—";
