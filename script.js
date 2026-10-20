@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://gdicbbcpvfbohqrjdzie.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://gdicbbcpvfbohqrjdzie.supabase.co";
 const SUPABASE_KEY = "sb_publishable_WTPFcMtRFf6y0iraVajbsA_ugXDFS4Q";
 const STORAGE_KEY = "holosHromadyResponsesV1";
 const form = document.getElementById("surveyForm");
